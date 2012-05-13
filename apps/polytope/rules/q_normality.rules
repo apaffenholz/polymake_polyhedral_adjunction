@@ -1,0 +1,192 @@
+#  Copyright (c) 2010-12 Andreas Paffenholz
+# 
+#  This program is free software; you can redistribute it and/or modify it
+#  under the terms of the GNU General Public License as published by the
+#  Free Software Foundation; either version 2, or (at your option) any
+#  later version: http://www.gnu.org/licenses/gpl.txt.
+#
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#-------------------------------------------------------------------------------
+#  $Project: polyhedral_adjunction $$Id: q_normality.rules 213 2012-05-12 21:56:59Z paffenholz $
+
+object Cone<Rational> {
+
+  # @category Polyhedral Adjunction
+  # true if the cone is alpha-canonical
+  # for more information see [DiRocco, Haase, Nill, Paffenholz: Polyhedral Adjunction Theory, arxiv:1105:2415]
+  property ALPHA_CANONICAL_CONE : Rational;
+
+}
+
+
+object Polytope<Rational> {
+
+  # @category Polyhedral Adjunction
+  # true if the normal fan of the polytope is [[fan::Q_GORENSTEIN]]
+  # FIXME this is only needed in a precondition, so this should better be checked directly
+  property Q_GORENSTEIN_NORMAL_FAN : Bool;
+    
+  # @category Polyhedral Adjunction
+  # the [[Q_CODEGREE]] is the the inverse of the minimal t such that L+t*K_X ceases to be effective
+  # alternatively it is the inverse of the maximal t 
+  # such that the polytope P with facets moved inwards by a lattice distance of t is not empty
+  property Q_CODEGREE : Rational;
+
+  # @category Polyhedral Adjunction
+  # the [[NEF_VALUE]] is the inverse of the minimal t such that L+t*K_X ceases to be nef
+  # alternatively it is the inverse of the supremum of all t such that the polytope obtained by 
+  # moving inwards all facets of the polytope by constant lattice width t has the same normal fan as the polytope
+  property NEF_VALUE : Rational;
+
+  # @category Polyhedral Adjunction
+  # true if [[Q_CODEGREE]] and [[NEF_VALUE]] coincide
+  property Q_NORMAL : Bool;
+
+  # @category Polyhedral Adjunction
+  # true if the normal fan of the polytope is alpha-canonical
+  property ALPHA_CANONICAL : Rational;
+
+  # @category Polyhedral Adjunction
+  # the dimension of the core face of P
+  # the core face is the polytope obtained by moving all facets inwards by a lattice distance of 1/[[Q_CODEGREE]]
+  # the core face itself can be obtained with the user function ''core_face''
+  property CORE_FACE_DIM : Int;
+
+  # @category Polyhedral Adjunction
+  # the indices of the facet inequalities that are tight on the core face
+  # the core face itself can be obtained with the user function ''core_face''
+  property CORE_FACETS : Set<Int>;
+
+}
+
+
+object Cone<Rational> {
+
+  rule ALPHA_CANONICAL_CONE : RAYS, N_RAYS, CONE_AMBIENT_DIM {
+
+    my $p = new Polytope<Rational>(
+	POINTS=>(ones_vector<Integer>($this->N_RAYS+1))|primitive($this->RAYS/(zero_vector<Rational>($this->CONE_AMBIENT_DIM))));
+    my $test_points = $p->LATTICE_POINTS;
+
+    my $alpha=1;
+    my $obj = new Vector<Rational>(ones_vector<Rational>($this->N_RAYS+1));
+    $obj->[0] = 0;
+    my $ineq=new Matrix<Rational>(unit_matrix<Rational>($this->N_RAYS+1));
+    my $zero=new Vector<Integer>(unit_vector<Integer>($test_points->cols,0));
+    
+    foreach (@{$test_points}) {
+      if ( $zero != $_ ) {
+        my $lp = new LinearProgram<Rational>(LINEAR_OBJECTIVE=>$obj);
+        my $q = new Polytope<Rational>(INEQUALITIES=>$ineq, 
+				       EQUATIONS=>(new Vector<Integer>(-$_->slice(~[0])))|transpose(primitive($this->RAYS)), LP=>$lp);
+        if ( $alpha > $q->LP->MAXIMAL_VALUE ) { $alpha = $q->LP->MAXIMAL_VALUE; }
+      }
+    }
+
+    $this->ALPHA_CANONICAL_CONE = $alpha;
+  }
+  precondition : POINTED;
+
+}
+
+object Polytope<Rational> {
+
+  rule Q_GORENSTEIN_NORMAL_FAN : FACETS, AFFINE_HULL, FACETS_THRU_VERTICES {
+    my $f=fan::normal_fan($this);
+    $this->Q_GORENSTEIN_NORMAL_FAN = $f->Q_GORENSTEIN;
+  }
+
+  rule CORE_FACETS : FACETS, Q_CODEGREE, FULL_DIM {
+    my $q=core_face($this); 
+    my $v=$q->REL_INT_POINT;
+    my $a=new Set<Int>;
+    my $f=primitive($this->FACETS);
+    foreach (0..$f->rows-1) { if ( ($f->row($_) * $v) * $this->Q_CODEGREE == 1 ) { $a += $_; } }
+    $this->CORE_FACETS=$a;
+  }
+
+  rule CORE_FACE_DIM : CONE_AMBIENT_DIM, FULL_DIM, FACETS {
+    my $c = core_face($this);
+    $this->CORE_FACE_DIM = $c->DIM;    
+  }
+
+  rule ALPHA_CANONICAL : VERTICES, FACETS, FACETS_THRU_VERTICES {
+    my $f=fan::normal_fan($this);
+    $this->ALPHA_CANONICAL = $f->ALPHA_CANONICAL;
+  }
+
+  rule Q_NORMAL : NEF_VALUE, Q_CODEGREE {
+      $this->Q_NORMAL = ($this->NEF_VALUE == $this->Q_CODEGREE );
+  }
+
+  rule Q_CODEGREE : FACETS {
+
+    my $m = new Matrix<Integer>(primitive($this->FACETS));
+    foreach (@{$m}) { $_ = div_exact($_,gcd($_)); }
+    $m |= -(ones_vector<Integer>($m->rows));
+    $m /= (unit_vector<Integer>($m->cols,$m->cols-1));
+  
+    my $q=new Polytope(INEQUALITIES=>$m);
+
+    my $lp=new LinearProgram<Rational>(LINEAR_OBJECTIVE=>new Vector<Rational>(unit_vector<Rational>($m->cols,$m->cols-1)));
+    $q->add("LP",$lp);
+    
+    $this->Q_CODEGREE = 1/($q->LP->MAXIMAL_VALUE);
+  }
+  precondition : CONE_DIM, CONE_AMBIENT_DIM { $this->CONE_DIM == $this->CONE_AMBIENT_DIM }
+
+
+  rule NEF_VALUE : FACETS_THRU_VERTICES, FACETS, N_VERTICES {
+
+  my $m = new Matrix<Integer>(primitive($this->FACETS));
+  foreach (@{$m}) { $_ = div_exact($_,gcd($_)); }
+  $m |= -(ones_vector<Integer>($m->rows));
+  $m /= (unit_vector<Integer>($m->cols,$m->cols-1));
+  my $s1 = $this->FACETS_THRU_VERTICES->[0];
+
+  my $lambda=max_spanned_at_vertex($m,$s1);
+
+  foreach (1..$this->N_VERTICES-1) {
+    my $s = $this->FACETS_THRU_VERTICES->[$_];
+    assign_max($lambda,max_spanned_at_vertex($m,$s));
+    my $mu = max_spanned_at_vertex($m,$s);
+  }
+  
+  $this->NEF_VALUE = $lambda;
+}
+precondition : Q_GORENSTEIN_NORMAL_FAN;
+
+}
+
+user_function adjoint_polytope {
+
+  my $p = shift;
+  my $l = shift;
+
+  if ( !$p->FULL_DIM ) {
+      croak("polytope must be full dimensional");
+  }
+
+  my $f = new Matrix<Rational>(primitive($p->FACETS));
+  my $b = $f->col(0) -= $l*(ones_vector<Rational>($f->rows));
+
+  my $q = new Polytope<Rational>(INEQUALITIES=>$f);
+  return $q;
+}
+
+sub max_spanned_at_vertex {
+
+  my $m = shift;
+  my $s = new Set<Int>(shift);
+
+  my $ineq = $m->minor(~$s,All);
+  my $eq = $m->minor($s,All);
+  my $q=new Polytope(INEQUALITIES=>$m->minor(~$s,All), EQUATIONS=>$m->minor($s,All));
+  my $lp=new LinearProgram<Rational>(LINEAR_OBJECTIVE=>new Vector<Rational>(unit_vector<Rational>($m->cols,$m->cols-1)));
+  $q->add("LP",$lp);
+
+  return 1/($q->LP->MAXIMAL_VALUE);
+}
