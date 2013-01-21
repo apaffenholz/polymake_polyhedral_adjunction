@@ -1,4 +1,4 @@
-#  Copyright (c) 2010-12 Andreas Paffenholz
+#  Copyright (c) 2010-13 Andreas Paffenholz
 # 
 #  This program is free software; you can redistribute it and/or modify it
 #  under the terms of the GNU General Public License as published by the
@@ -15,7 +15,7 @@
 object Cone<Rational> {
 
   # @category Polyhedral Adjunction
-  # true if the cone is alpha-canonical
+  # The maximal alpha such that the cone is alpha-canonical
   # for more information see [DiRocco, Haase, Nill, Paffenholz: Polyhedral Adjunction Theory, arxiv:1105:2415]
   property ALPHA_CANONICAL_CONE : Rational;
 
@@ -46,8 +46,8 @@ object Polytope<Rational> {
   property Q_NORMAL : Bool;
 
   # @category Polyhedral Adjunction
-  # true if the normal fan of the polytope is alpha-canonical
-  property ALPHA_CANONICAL : Rational;
+  # The maximal alpha such that the normal fan of the polytope is alpha-canonical
+  property ALPHA_CANONICAL_NORMAL_FAN : Rational;
 
   # @category Polyhedral Adjunction
   # the dimension of the core face of P
@@ -113,9 +113,9 @@ object Polytope<Rational> {
     $this->CORE_FACE_DIM = $c->DIM;    
   }
 
-  rule ALPHA_CANONICAL : VERTICES, FACETS, FACETS_THRU_VERTICES {
+  rule ALPHA_CANONICAL_NORMAL_FAN : VERTICES, FACETS, FACETS_THRU_VERTICES {
     my $f=fan::normal_fan($this);
-    $this->ALPHA_CANONICAL = $f->ALPHA_CANONICAL;
+    $this->ALPHA_CANONICAL_NORMAL_FAN = $f->ALPHA_CANONICAL;
   }
 
   rule Q_NORMAL : NEF_VALUE, Q_CODEGREE {
@@ -171,7 +171,7 @@ user_function adjoint_polytope {
   }
 
   my $f = new Matrix<Rational>(primitive($p->FACETS));
-  my $b = $f->col(0) -= $l*(ones_vector<Rational>($f->rows));
+  $f->col(0) -= $l*(ones_vector<Rational>($f->rows));
 
   my $q = new Polytope<Rational>(INEQUALITIES=>$f);
   return $q;

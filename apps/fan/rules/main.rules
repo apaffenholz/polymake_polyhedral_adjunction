@@ -1,0 +1,36 @@
+#  Copyright (c) 2010-13 Andreas Paffenholz
+# 
+#  This program is free software; you can redistribute it and/or modify it
+#  under the terms of the GNU General Public License as published by the
+#  Free Software Foundation; either version 2, or (at your option) any
+#  later version: http://www.gnu.org/licenses/gpl.txt.
+#
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#-------------------------------------------------------------------------------
+#  $Project: polyhedral_adjunction $$Id: q_normality.rules 213 2012-05-12 21:56:59Z paffenholz $
+
+object PolyhedralFan {
+
+  # @category Polyhedral Adjunction
+  # The maximal alpha such that the fan is alpha-canonical
+  # for more information see [DiRocco, Haase, Nill, Paffenholz: Polyhedral Adjunction Theory, arxiv:1105:2415]
+  property ALPHA_CANONICAL : Rational;
+
+
+  rule ALPHA_CANONICAL : MAXIMAL_CONES, RAYS {
+
+      # alpha is at most 1
+      my $alpha=new Rational(1);
+      foreach (@{$this->MAXIMAL_CONES}) {
+	  my $c = new Cone(RAYS=>$this->RAYS->minor($_,All));
+	  $alpha = min($alpha, $c->ALPHA_CANONICAL_CONE);
+      }
+
+      $this->ALPHA_CANONICAL = $alpha;
+  }
+  precondition : FULL_DIM;
+
+}

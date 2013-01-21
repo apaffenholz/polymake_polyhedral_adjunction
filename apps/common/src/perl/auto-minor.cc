@@ -31,7 +31,6 @@ namespace polymake { namespace common {
       WrapperReturnLvalue( T0, arg0.get<T0>().minor(arg1.get<T1>(), arg2.get<T2>()) );
    };
 
-   FunctionInstance4perl(minor_X_X_f5, perl::Canned< Wary< Matrix< Rational > > >, perl::Canned< const pm::Complement<pm::incidence_line<pm::AVL::tree<pm::sparse2d::traits<pm::sparse2d::traits_base<pm::nothing, true, false, (pm::sparse2d::restriction_kind)0>, false, (pm::sparse2d::restriction_kind)0> > const&>, int, pm::operations::cmp> >, perl::Enum<pm::all_selector>);
    FunctionInstance4perl(minor_X_X_f5, perl::Canned< Wary< Matrix< Rational > > >, perl::Canned< const pm::Complement<pm::Set<int, pm::operations::cmp>, int, pm::operations::cmp> >, perl::Enum<pm::all_selector>);
    FunctionInstance4perl(minor_X_X_f5, perl::Canned< Wary< Matrix< Rational > > >, perl::Canned< const Set< int > >, perl::Enum<pm::all_selector>);
    FunctionInstance4perl(minor_X_X_f5, perl::Canned< Wary< Matrix< Integer > > >, perl::Canned< const pm::Complement<pm::SingleElementSet<int const&>, int, pm::operations::cmp> >, perl::Enum<pm::all_selector>);
