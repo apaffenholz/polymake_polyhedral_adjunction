@@ -84,6 +84,7 @@ namespace polymake { namespace polytope {
       
 
       Matrix<Rational> VR = c.give("VERTICES");
+
       VR -= repeat_row(VR.row(0),VR.rows());
       VR = VR.minor(~scalar2set(0),~scalar2set(0));
       Matrix<Integer> M = common::primitive(VR);
@@ -94,9 +95,10 @@ namespace polymake { namespace polytope {
 	R.col  (SNF.rank-1) *= -1;
 
       Matrix<Rational> V = p.give("VERTICES");
+
       V -= repeat_row(V.row(0),V.rows());
       V = V.minor(All,~scalar2set(0));
-      V = V*R;
+      V = V*inv(R);
 
       V = ones_vector<Rational>(V.rows())|V.minor(All,~range(0,SNF.rank-1));
       q.take("POINTS") << V;
