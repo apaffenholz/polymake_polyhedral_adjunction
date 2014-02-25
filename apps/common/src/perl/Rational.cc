@@ -1,6 +1,6 @@
 /* Copyright (c) 1997-2010
    Ewgenij Gawrilow, Michael Joswig (Technische Universitaet Darmstadt, Germany)
-   http://www.polymake.de
+   http://www.polymake.org
 
    This program is free software; you can redistribute it and/or modify it
    under the terms of the GNU General Public License as published by the
@@ -21,9 +21,9 @@
 #include "polymake/Rational.h"
 #include "polymake/Integer.h"
 #include "polymake/linalg.h"
-namespace polymake { namespace common {
+
+namespace polymake { namespace common { namespace {
 ///==== Automatically generated contents follow.    Please do not delete this line. ====
    OperatorInstance4perl(convert, Rational, perl::Canned< const Integer >);
-   OperatorInstance4perl(Binary_mul, perl::Canned< const Rational >, perl::Canned< const pm::SameElementVector<pm::Rational const&> >);
 ///==== Automatically generated contents end here.  Please do not delete this line. ====
-} }
+} } }

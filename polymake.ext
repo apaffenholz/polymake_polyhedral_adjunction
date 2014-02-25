@@ -1,0 +1,12 @@
+URI http://polymake.org/polytopes/paffenholz/data/polymake/extensions/PolyhedralAdjunction#0.1
+
+NAME polyhedralAdjunction
+
+CREDIT polyhedral_adjunction
+ the extension PolyhedralAdjunction provides methods to work with lattice polytopes
+ in the context of polyhedral adjunction theory. For basic definitions see
+ DiRocco, Haase, Nill, Paffenholz: Polyhedral Adjunction Theory, arxiv:1105:2415
+ http://www.mathematik.tu-darmstadt.de/~paffenholz
+ (c) 2011-2014 Andreas Paffenholz, TU Darmstadt, www.mathematik.tu-darmstadt.de/~paffenholz
+
+

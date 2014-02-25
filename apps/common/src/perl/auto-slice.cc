@@ -1,6 +1,6 @@
 /* Copyright (c) 1997-2010
    Ewgenij Gawrilow, Michael Joswig (Technische Universitaet Darmstadt, Germany)
-   http://www.polymake.de
+   http://www.polymake.org
 
    This program is free software; you can redistribute it and/or modify it
    under the terms of the GNU General Public License as published by the
@@ -23,14 +23,8 @@
 #include "polymake/Set.h"
 #include "polymake/Rational.h"
 #include "polymake/IncidenceMatrix.h"
-namespace polymake { namespace common {
-///==== Automatically generated contents follow.    Please do not delete this line. ====
-   template <typename T0, typename T1>
-   FunctionInterface4perl( slice_X_f5, T0,T1 ) {
-      perl::Value arg0(stack[0]), arg1(stack[1]);
-      WrapperReturnLvalue( T0, arg0.get<T0>().slice(arg1.get<T1>()) );
-   };
 
-   FunctionInstance4perl(slice_X_f5, perl::Canned< const Wary< pm::IndexedSlice<pm::masquerade<pm::ConcatRows, pm::Matrix_base<pm::Integer> const&>, pm::Series<int, true>, void> > >, perl::Canned< const pm::Complement<pm::SingleElementSet<int const&>, int, pm::operations::cmp> >);
+namespace polymake { namespace common { namespace {
+///==== Automatically generated contents follow.    Please do not delete this line. ====
 ///==== Automatically generated contents end here.  Please do not delete this line. ====
-} }
+} } }

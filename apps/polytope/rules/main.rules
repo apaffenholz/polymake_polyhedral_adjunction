@@ -12,15 +12,7 @@
 #-------------------------------------------------------------------------------
 #  $Project: polyhedral_adjunction $$Id: main.rules 183 2012-02-15 14:42:59Z paffenholz $
 
-CREDIT polyhedral_adjunction
- the extension PolyhedralAdjunction provides methods to work with lattice polytopes 
- in the context of polyhedral adjunction theory. For basic definitions see
- DiRocco, Haase, Nill, Paffenholz: Polyhedral Adjunction Theory, arxiv:1105:2415
- http://www.mathematik.tu-darmstadt.de/~paffenholz
-
 label polyhedral_adjunction
-
-CREDIT polyhedral_adjunction
 
 INCLUDE
  q_normality.rules
