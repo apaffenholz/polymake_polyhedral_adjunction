@@ -161,6 +161,12 @@ precondition : Q_GORENSTEIN_NORMAL_FAN;
 
 }
 
+# @category Polyhedral Adjunction
+# This function computes the adjoint polytope 
+# 
+# Contained in extension ''PolyhedralAdjunction''.
+# @param Polytope P the input poltope
+# @param Int c the lattice distance from the original faces
 user_function adjoint_polytope {
 
   my $p = shift;

@@ -12,6 +12,10 @@
 #-------------------------------------------------------------------------------
 #  $Project: polyhedral_adjunction $$Id: q_normality.rules 213 2012-05-12 21:56:59Z paffenholz $
 
+# @topic category objects/PolyhedralFan/properties/Polyhedral Adjunction
+# These are properties from polyhedral adjunction theory. For more information see [DiRocco, Haase, Nill, Paffenholz: Polyhedral Adjunction Theory, arxiv:1105:2415].
+
+
 object PolyhedralFan {
 
   # @category Polyhedral Adjunction

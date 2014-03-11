@@ -107,7 +107,7 @@ namespace polymake { namespace polytope {
     }
 
     UserFunction4perl("# @category Polyhedral Adjunction"
-		      "Produces the mountain over P"
+		      "# Produces the mountain over P"
 		      "# "
 		      "# Let P be given by primitive non-redundant inequalities  0<= b+Ax"
 		      "# Then the mountain over $P$ is the polytope defined by"
