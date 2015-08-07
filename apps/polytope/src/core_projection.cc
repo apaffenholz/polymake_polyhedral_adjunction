@@ -16,6 +16,8 @@
 
 
 #include "polymake/client.h"
+#include "polymake/Set.h"
+#include <polymake/PowerSet.h>
 #include "polymake/Matrix.h"
 #include "polymake/SparseMatrix.h"
 #include "polymake/Integer.h"

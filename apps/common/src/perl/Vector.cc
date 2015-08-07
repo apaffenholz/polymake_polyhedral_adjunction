@@ -17,14 +17,14 @@
 
 ///==== this line controls the automatic file splitting: max.instances=40
 
+#include "polymake/IncidenceMatrix.h"
+#include "polymake/Integer.h"
+#include "polymake/Matrix.h"
+#include "polymake/Rational.h"
+#include "polymake/Set.h"
+#include "polymake/Vector.h"
 #include "polymake/client.h"
 #include "polymake/linalg.h"
-#include "polymake/Rational.h"
-#include "polymake/Matrix.h"
-#include "polymake/Vector.h"
-#include "polymake/Integer.h"
-#include "polymake/Set.h"
-#include "polymake/IncidenceMatrix.h"
 
 namespace polymake { namespace common { namespace {
 ///==== Automatically generated contents follow.    Please do not delete this line. ====
@@ -36,13 +36,11 @@ namespace polymake { namespace common { namespace {
 
    FunctionInstance4perl(new_X, Vector< Integer >, perl::Canned< const pm::SameElementSparseVector<pm::SingleElementSet<int>, pm::Integer> >);
    OperatorInstance4perl(Unary_neg, perl::Canned< const Wary< pm::IndexedSlice<pm::IndexedSlice<pm::masquerade<pm::ConcatRows, pm::Matrix_base<pm::Integer> const&>, pm::Series<int, true>, void> const&, pm::Complement<pm::SingleElementSet<int const&>, int, pm::operations::cmp> const&, void> > >);
-   FunctionInstance4perl(new_X, Vector< Integer >, perl::Canned< const Vector< Integer > >);
    OperatorInstance4perl(Binary__ne, perl::Canned< const Wary< Vector< Integer > > >, perl::Canned< const pm::IndexedSlice<pm::masquerade<pm::ConcatRows, pm::Matrix_base<pm::Integer> const&>, pm::Series<int, true>, void> >);
    OperatorInstance4perl(Unary_neg, perl::Canned< const Wary< pm::SameElementVector<pm::Integer> > >);
    OperatorInstance4perl(Binary_sub, perl::Canned< const Wary< Vector< Integer > > >, perl::Canned< const pm::IndexedSlice<pm::masquerade<pm::ConcatRows, pm::Matrix_base<pm::Rational> const&>, pm::Series<int, true>, void> >);
    OperatorInstance4perl(Binary_mul, perl::Canned< const Wary< pm::IndexedSlice<pm::masquerade<pm::ConcatRows, pm::Matrix_base<pm::Integer>&>, pm::Series<int, true>, void> > >, perl::Canned< const Vector< Rational > >);
    OperatorInstance4perl(Unary_neg, perl::Canned< const Wary< pm::SameElementVector<pm::Integer const&> > >);
    OperatorInstance4perl(Binary_mul, int, perl::Canned< const Wary< pm::SameElementVector<pm::Rational const&> > >);
-   OperatorInstance4perl(BinaryAssign_sub, perl::Canned< Wary< pm::IndexedSlice<pm::masquerade<pm::ConcatRows, pm::Matrix_base<pm::Rational>&>, pm::Series<int, false>, void> > >, perl::Canned< const Vector< Rational > >);
 ///==== Automatically generated contents end here.  Please do not delete this line. ====
 } } }

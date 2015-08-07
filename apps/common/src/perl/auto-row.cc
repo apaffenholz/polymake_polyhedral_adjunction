@@ -17,11 +17,12 @@
 
 ///==== this line controls the automatic file splitting: max.instances=40
 
-#include "polymake/client.h"
-#include "polymake/Matrix.h"
-#include "polymake/Integer.h"
 #include "polymake/IncidenceMatrix.h"
+#include "polymake/Integer.h"
+#include "polymake/Matrix.h"
 #include "polymake/SparseMatrix.h"
+#include "polymake/client.h"
+
 namespace polymake { namespace common { namespace {
 ///==== Automatically generated contents follow.    Please do not delete this line. ====
    template <typename T0>
@@ -30,7 +31,6 @@ namespace polymake { namespace common { namespace {
       WrapperReturnLvalue( T0, arg0.get<T0>().row(arg1) );
    };
 
-   FunctionInstance4perl(row_x_f5, perl::Canned< Wary< Matrix< Integer > > >);
    FunctionInstance4perl(row_x_f5, perl::Canned< Wary< SparseMatrix< Integer, NonSymmetric > > >);
 ///==== Automatically generated contents end here.  Please do not delete this line. ====
 } } }
