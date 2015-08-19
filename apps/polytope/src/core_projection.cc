@@ -1,5 +1,6 @@
 /*
-  Copyright (c) 2010-13 Andreas Paffenholz
+  Copyright (c) 2010-15 Andreas Paffenholz
+                TU Darmstadt, http://www.mathematik.tu-darmstadt.de/~paffenholz
  
   This program is free software; you can redistribute it and/or modify it
   under the terms of the GNU General Public License as published by the
@@ -11,7 +12,6 @@
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU General Public License for more details.
 -------------------------------------------------------------------------------
-  $Project: polyhedral_adjunction $$Id: core_projection.cc 179 2012-02-09 15:16:42Z paffenholz $
 */
 
 

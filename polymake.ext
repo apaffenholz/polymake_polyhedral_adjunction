@@ -1,4 +1,4 @@
-URI http://polymake.org/polytopes/paffenholz/data/polymake/extensions/PolyhedralAdjunction#0.1
+URI http://polymake.org/polytopes/paffenholz/data/polymake/extensions/PolyhedralAdjunction#1.0
 
 NAME polyhedralAdjunction
 
@@ -7,6 +7,6 @@ CREDIT polyhedral_adjunction
  in the context of polyhedral adjunction theory. For basic definitions see
  DiRocco, Haase, Nill, Paffenholz: Polyhedral Adjunction Theory, arxiv:1105:2415
  http://www.mathematik.tu-darmstadt.de/~paffenholz
- (c) 2011-2014 Andreas Paffenholz, TU Darmstadt, www.mathematik.tu-darmstadt.de/~paffenholz
+ (c) 2011-2015 Andreas Paffenholz, TU Darmstadt, www.mathematik.tu-darmstadt.de/~paffenholz
 
 
