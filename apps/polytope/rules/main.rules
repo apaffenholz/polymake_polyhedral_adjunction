@@ -1,6 +1,6 @@
 #  Copyright (c) 2010-15 Andreas Paffenholz
 #                TU Darmstadt, http://www.mathematik.tu-darmstadt.de/~paffenholz
-# 
+#
 #  This program is free software; you can redistribute it and/or modify it
 #  under the terms of the GNU General Public License as published by the
 #  Free Software Foundation; either version 2, or (at your option) any
@@ -15,24 +15,8 @@
 
 label polyhedral_adjunction
 
-# @topic category objects/Polytope/properties/Polyhedral Adjunction
-# These are properties from polyhedral adjunction theory. For more information see [DiRocco, Haase, Nill, Paffenholz: Polyhedral Adjunction Theory, arxiv:1105:2415].
+HELP
+    help.rules
 
-# @topic category objects/Polytope<Rational>/properties/Polyhedral Adjunction
-# These are properties from polyhedral adjunction theory. For more information see [DiRocco, Haase, Nill, Paffenholz: Polyhedral Adjunction Theory, arxiv:1105:2415].
-
-# @topic category functions/Polyhedral Adjunction
-# These are functions for computations in polyhedral adjunction theory. For more information see [DiRocco, Haase, Nill, Paffenholz: Polyhedral Adjunction Theory, arxiv:1105:2415].
-
-# @topic category  objects/Cone<Rational>/properties/Polyhedral Adjunction
-# These are properties from polyhedral adjunction theory. For more information see [DiRocco, Haase, Nill, Paffenholz: Polyhedral Adjunction Theory, arxiv:1105:2415].
-
-# @topic category objects/Polytope/specializations/Polytope<Rational>/properties/Polyhedral Adjunction
-# These are properties from polyhedral adjunction theory. For more information see [DiRocco, Haase, Nill, Paffenholz: Polyhedral Adjunction Theory, arxiv:1105:2415].
-
-# @topic category objects/Cone/specializations/Cone<Rational>/properties/Polyhedral Adjunction
-# These are properties from polyhedral adjunction theory. For more information see [DiRocco, Haase, Nill, Paffenholz: Polyhedral Adjunction Theory, arxiv:1105:2415].
-    
 INCLUDE
  q_normality.rules
-
