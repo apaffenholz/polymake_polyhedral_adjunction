@@ -28,12 +28,12 @@
 
 namespace polymake { namespace polytope {
 
-    perl::Object mountain ( perl::Object p ) {
+    BigObject mountain ( BigObject p ) {
 
       if (!p.give("FULL_DIM") )     // only for full dimensional polytopes
-	throw std::runtime_error("not a full dimensional polytope");
+	      throw std::runtime_error("not a full dimensional polytope");
 
-      perl::Object q("Polytope<Rational>");
+      BigObject q("Polytope<Rational>");
 
       Matrix<Rational> FR = p.give("FACETS");
       Matrix<Integer> F = common::primitive(FR);
@@ -44,16 +44,16 @@ namespace polymake { namespace polytope {
       return q;
     }
 
-    perl::Object core_face ( perl::Object p ) {
+    BigObject core_face ( BigObject p ) {
       
-      perl::Object q("Polytope<Rational>");
+      BigObject q("Polytope<Rational>");
       
       int adim = p.give("CONE_AMBIENT_DIM");
       adim -= 1;
 
-      perl::Object m = mountain(p);
+      BigObject m = mountain(p);
 
-      perl::Object lp("LinearProgram<Rational>");
+      BigObject lp("LinearProgram<Rational>");
       Vector<Rational> v = unit_vector<Rational>(adim+2,adim+1);
 
       lp.take("LINEAR_OBJECTIVE") << v;
@@ -65,7 +65,7 @@ namespace polymake { namespace polytope {
       m.give("GRAPH.ADJACENCY");
       m.give("FAR_FACE");
 
-      Set<int> core_face = m.give("LP.MAXIMAL_FACE");
+      Set<Int> core_face = m.give("LP.MAXIMAL_FACE");
 
       Matrix<Rational> V = m.give("VERTICES");
 
@@ -74,10 +74,10 @@ namespace polymake { namespace polytope {
       return q;
     }
 
-    perl::Object core_projection ( perl::Object p ) {
+    BigObject core_projection ( BigObject p ) {
 
-      perl::Object q("Polytope<Rational>");
-      perl::Object c = core_face(p);
+      BigObject q("Polytope<Rational>");
+      BigObject c = core_face(p);
       
       int core_dim = c.give("CONE_DIM");
       core_dim--;
@@ -94,7 +94,7 @@ namespace polymake { namespace polytope {
 
       Matrix<Integer> R = SNF.right_companion;
       if (det(R) < 0)              // det(R) > 0
-	R.col  (SNF.rank-1) *= -1;
+	      R.col  (SNF.rank-1) *= -1;
 
       Matrix<Rational> V = p.give("VERTICES");
 
